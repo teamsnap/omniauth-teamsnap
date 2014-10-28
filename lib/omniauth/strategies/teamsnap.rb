@@ -1,9 +1,10 @@
-require 'omniauth-oauth2'
+require "omniauth-oauth2"
 
 module OmniAuth
   module Strategies
     class TeamSnap < OmniAuth::Strategies::OAuth2
       option :name, :teamsnap
+      option :authorize_options, [:scope]
 
       option :client_options, {
         :site => "https://auth.teamsnap.com",
@@ -11,29 +12,34 @@ module OmniAuth
         :token_method => :post
       }
 
-      def authorize_params
-        super.tap do |params|
-          %w[scope client_options].each do |v|
-            if request.params[v]
-              params[v.to_sym] = request.params[v]
-            end
-          end
-        end
-      end
-
-      uid { raw_info["id"] }
+      uid { raw_info.find { |d| d.name == "id"}.value }
 
       info do
         {
-          :email => raw_info["email"],
-          :first_name => raw_info["first_name"],
-          :last_name => raw_info["last_name"]
+          :email => raw_info.find { |d| d.name == "email"}.value,
+          :first_name => raw_info.find { |d| d.name == "first_name"}.value,
+          :last_name => raw_info.find { |d| d.name == "last_name"}.value
         }
       end
 
       def raw_info
-        @raw_info ||= access_token.get("https://apiv3.teamsnap.com/me").parsed
+        return @raw_info if @raw_info
+
+        # TeamSnap /me endpoint is not compatible with standard oauth2 access_token.get(url).parsed calls
+        # 1) oauth2 doesn't parse response with Content-Type: application/vnd.collection+json
+        # 2) TeamSnap api uses custom X-Teamsnap-Access-Token header, no way to specify this oauth2 request
+        response = client.connection.get do |req|
+          req.url "https://apiv3.teamsnap.com/me"
+          req.headers["X-Teamsnap-Access-Token"] = access_token.token
+        end
+        deserializer = Conglomerate::TreeDeserializer.new(JSON.parse(response.body))
+        collection_json = deserializer.deserialize
+
+        @raw_info = collection_json.items.first.data
       end
+
     end
   end
 end
+
+OmniAuth.config.add_camelization 'teamsnap', 'TeamSnap'
