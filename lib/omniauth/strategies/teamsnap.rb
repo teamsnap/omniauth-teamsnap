@@ -3,16 +3,13 @@ require 'omniauth-oauth2'
 module OmniAuth
   module Strategies
     class TeamSnap < OmniAuth::Strategies::OAuth2
+      option :name, :teamsnap
+
       option :client_options, {
-        :site => "https://apiv3.teamsnap.com",
-        :authorize_url => "https://auth.teamsnap.com/oauth/authorize",
-        #:token_url => "https://auth.teamsnap.com/oauth/token",
+        :site => "https://auth.teamsnap.com",
+        :authorize_url => "/oauth/authorize",
         :token_method => :post
       }
-
-      def request_phase
-        super
-      end
 
       def authorize_params
         super.tap do |params|
@@ -24,27 +21,19 @@ module OmniAuth
         end
       end
 
-      uid { raw_info['id'].to_s }
+      uid { raw_info["id"] }
 
       info do
         {
           :email => raw_info["email"],
-          :name => "#{raw_info["first_name"]} #{raw_info["last_name"]}",
           :first_name => raw_info["first_name"],
           :last_name => raw_info["last_name"]
         }
       end
 
-      extra do
-        {:raw_info => raw_info}
-      end
-
       def raw_info
-        access_token.options[:mode] = :query
-        @raw_info ||= access_token.get("/me").parsed
+        @raw_info ||= access_token.get("https://apiv3.teamsnap.com/me").parsed
       end
     end
   end
 end
-
-OmniAuth.config.add_camelization 'teamsnap', 'TeamSnap'
