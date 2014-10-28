@@ -14,7 +14,7 @@ on [Cogsworth](https://auth.twitter.com).
 
 TeamSnap API v3 lets you set scopes to provide granular access to different types of data:
 
-  use OmniAuth::Builder do
-    provider :teamsnap, ENV['TEAMSNAP_KEY'], ENV['TEAMSNAP_SECRET'], scope: "read write"
-  end
+    use OmniAuth::Builder do
+      provider :teamsnap, ENV['TEAMSNAP_KEY'], ENV['TEAMSNAP_SECRET'], scope: "read write"
+    end
 
