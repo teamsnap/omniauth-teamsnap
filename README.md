@@ -2,7 +2,7 @@
 
 This is the official OmniAuth strategy for authenticating to TeamSnap. To
 use it, you'll need to sign up for an OAuth2 Application Id and Secret
-on [Cogsworth](https://auth.twitter.com).
+on [Cogsworth](https://auth.teamsnap.com).
 
 ## Basic Usage
 
