@@ -25,12 +25,12 @@ module OmniAuth
       def raw_info
         return @raw_info if @raw_info
 
-        # TeamSnap /me endpoint is not compatible with standard oauth2 access_token.get(url).parsed calls
-        # 1) oauth2 doesn't parse response with Content-Type: application/vnd.collection+json
-        # 2) TeamSnap api uses custom X-Teamsnap-Access-Token header, no way to specify this oauth2 request
+        # TeamSnap /me endpoint is not compatible with standard oauth2
+        # access_token.get(url).parsed calls because oauth2 doesn't parse
+        # responses with Content-Type: application/vnd.collection+json
         response = client.connection.get do |req|
-          req.url "https://apiv3.teamsnap.com/me"
-          req.headers["X-Teamsnap-Access-Token"] = access_token.token
+          req.url "https://api.teamsnap.com/v3/me"
+          req.headers["Authorization"] = "Bearer #{access_token.token}"
         end
         deserializer = Conglomerate::TreeDeserializer.new(JSON.parse(response.body))
         collection_json = deserializer.deserialize
