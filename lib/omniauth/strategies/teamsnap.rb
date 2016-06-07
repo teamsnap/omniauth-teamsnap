@@ -12,13 +12,13 @@ module OmniAuth
         :token_method => :post
       }
 
-      uid { raw_info.find { |d| d.name == "id"}.value }
+      uid { parse_datum("id") }
 
       info do
         {
-          :email => raw_info.find { |d| d.name == "email"}.value,
-          :first_name => raw_info.find { |d| d.name == "first_name"}.value,
-          :last_name => raw_info.find { |d| d.name == "last_name"}.value
+          :email => parse_datum("email"),
+          :first_name => parse_datum("first_name"),
+          :last_name => parse_datum("last_name")
         }
       end
 
@@ -32,12 +32,16 @@ module OmniAuth
           req.url "https://api.teamsnap.com/v3/me"
           req.headers["Authorization"] = "Bearer #{access_token.token}"
         end
-        deserializer = Conglomerate::TreeDeserializer.new(JSON.parse(response.body))
-        collection_json = deserializer.deserialize
+        collection_json = JSON.parse(response.body)
 
-        @raw_info = collection_json.items.first.data
+        @raw_info = collection_json["collection"]["items"].first.fetch("data")
       end
 
+      private
+
+      def parse_datum(property)
+        raw_info.find { |d| d["name"] == property }.fetch("value")
+      end
     end
   end
 end

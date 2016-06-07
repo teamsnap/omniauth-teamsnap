@@ -19,8 +19,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "omniauth", "~> 1.2"
   spec.add_dependency "omniauth-oauth2", "~> 1.3.1"
-  spec.add_dependency "faraday", "~> 0.9"
-  spec.add_dependency "conglomerate", "~> 0.15"
+  spec.add_dependency "faraday", "~> 0.9.2"
   spec.add_development_dependency "rspec", "~> 2.7"
   spec.add_development_dependency "rack-test"
   spec.add_development_dependency "simplecov"
