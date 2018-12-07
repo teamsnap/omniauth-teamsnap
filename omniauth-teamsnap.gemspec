@@ -17,10 +17,9 @@ Gem::Specification.new do |spec|
   spec.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "omniauth", "~> 1.2"
-  spec.add_dependency "omniauth-oauth2", "1.3.1"
-  spec.add_dependency "faraday", "~> 0.9", ">= 0.9.2"
-  spec.add_development_dependency "rspec", "~> 2.7"
+  spec.add_dependency "omniauth", "~> 1.8"
+  spec.add_dependency "omniauth-oauth2", "~> 1.5"
+  spec.add_development_dependency "rspec", "~> 3.8"
   spec.add_development_dependency "rack-test"
   spec.add_development_dependency "simplecov"
   spec.add_development_dependency "webmock"
