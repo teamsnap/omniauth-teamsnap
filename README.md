@@ -1,5 +1,9 @@
 # OmniAuth TeamSnap
 
+[![Build](https://travis-ci.org/teamsnap/omniauth-teamsnap.svg?branch=master)](https://travis-ci.org/teamsnap/omniauth-teamsnap)
+[![Gem Version](https://badge.fury.io/rb/omniauth-teamsnap.svg)](https://badge.fury.io/rb/omniauth-teamsnap)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+
 This is the official OmniAuth strategy for authenticating to TeamSnap. To
 use it, you'll need to sign up for an OAuth2 Application Id and Secret
 on [Cogsworth](https://auth.teamsnap.com).
