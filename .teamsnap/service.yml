@@ -9,8 +9,10 @@ error_monitoring: []
 continuous_integration:
   - name: travis_ci
 bug_tracking: []
-documentation: []
+documentation:
+  - name: README.md
 deployment: []
 languages:
   - name: Ruby
+    version: 2.5.8
 frameworks: []
