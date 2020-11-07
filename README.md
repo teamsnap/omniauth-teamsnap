@@ -36,4 +36,3 @@ An example auth hash available in `request.env['omniauth.auth']`:
   :extra = {}
 }
 ```
-
