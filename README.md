@@ -1,6 +1,5 @@
 # OmniAuth TeamSnap
 
-[![Build](https://travis-ci.org/teamsnap/omniauth-teamsnap.svg?branch=main)](https://travis-ci.org/teamsnap/omniauth-teamsnap)
 [![Gem Version](https://badge.fury.io/rb/omniauth-teamsnap.svg)](https://badge.fury.io/rb/omniauth-teamsnap)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
@@ -39,4 +38,12 @@ An example auth hash available in `request.env['omniauth.auth']`:
   },
   :extra = {}
 }
+```
+
+## Testing
+
+```
+docker build . -t omniauth-teamsnap:test -f Test.dockerfile
+docker run -t omniauth-teamsnap:test
+docker image rm omniauth-teamsnap:test --force
 ```
