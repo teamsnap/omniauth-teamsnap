@@ -40,3 +40,11 @@ An example auth hash available in `request.env['omniauth.auth']`:
   :extra = {}
 }
 ```
+
+## Testing
+
+```
+docker build . -t omniauth-teamsnap:test -f Test.dockerfile
+docker run -t omniauth-teamsnap:test
+docker image rm omniauth-teamsnap:test --force
+```
