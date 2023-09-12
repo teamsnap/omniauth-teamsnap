@@ -1,6 +1,5 @@
 # OmniAuth TeamSnap
 
-[![Build](https://travis-ci.org/teamsnap/omniauth-teamsnap.svg?branch=main)](https://travis-ci.org/teamsnap/omniauth-teamsnap)
 [![Gem Version](https://badge.fury.io/rb/omniauth-teamsnap.svg)](https://badge.fury.io/rb/omniauth-teamsnap)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
