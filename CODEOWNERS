@@ -1,1 +1,4 @@
 * @teamsnap/teams-web-backend
+.teamsnap/** @teamsnap/platform @teamsnap/teams-web-backend
+.github/** @teamsnap/platform @teamsnap/quality @teamsnap/teams-web-backend
+CODEOWNERS @teamsnap/platform @teamsnap/teams-web-backend
